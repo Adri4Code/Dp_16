@@ -27,7 +27,7 @@ public class Puerta {
 
         int mitad = (primero + ultimo) / 2;
 
-        this.cerradura.insertar(v[mitad]);
+        this.cerradura.insertar(new Llave(v[mitad].getId()));
         System.out.println(v[mitad].getId());
 
         if (primero != ultimo) {
