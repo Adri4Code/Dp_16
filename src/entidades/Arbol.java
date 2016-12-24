@@ -17,7 +17,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
     /**
      * Dato almacenado en cada nodo del árbol.
      */
-    private Integer datoRaiz;
+    private TYPE datoRaiz;
 
     /**
      * Atributo que indica si el árbol está vacío.
@@ -50,7 +50,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
      * @param datoRaiz Raíz del árbol que se está creando
      * @param hDer     El hijo derecho del árbol que se está creando
      */
-    public Arbol(Arbol<TYPE> hIzq, Integer datoRaiz, Arbol<TYPE> hDer) {
+    public Arbol(Arbol<TYPE> hIzq, TYPE datoRaiz, Arbol<TYPE> hDer) {
         this.esVacio = false;
         this.datoRaiz = datoRaiz;
         this.hIzq = hIzq;
@@ -80,7 +80,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
      *
      * @return La raíz del árbol
      */
-    public Integer getRaiz() {
+    public TYPE getRaiz() {
         return datoRaiz;
     }
 
@@ -99,7 +99,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
      * @param dato El dato a insertar
      * @return verdadero si el dato se ha insertado correctamente, falso en caso contrario
      */
-    public boolean insertar(Integer dato) {
+    public boolean insertar(TYPE dato) {
         boolean resultado = true;
         if (vacio()) {
             datoRaiz = dato;
@@ -127,7 +127,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
      * @param dato El dato a buscar
      * @return verdadero si el dato se encuentra en el árbol, falso en caso contrario
      */
-    public boolean pertenece(Integer dato) {
+    public boolean pertenece(TYPE dato) {
         Arbol<TYPE> aux = null;
         boolean encontrado = false;
         if (!vacio()) {
@@ -150,7 +150,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
      *
      * @param dato El dato que se quiere borrar
      */
-    public void borrar(Integer dato) {
+    public void borrar(TYPE dato) {
         if (!vacio()) {
             if (dato.compareTo(this.datoRaiz) < 0) {            //dato<datoRaiz
                 hIzq = hIzq.borrarOrden(dato);
@@ -173,8 +173,8 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
      * @param dato El dato a borrar
      * @return Devuelve el árbol resultante después de haber realizado el borrado
      */
-    private Arbol<TYPE> borrarOrden(Integer dato) {
-        Integer datoaux;
+    private Arbol<TYPE> borrarOrden(TYPE dato) {
+        TYPE datoaux;
         Arbol<TYPE> retorno = this;
         Arbol<TYPE> aborrar;
         Arbol<TYPE> candidato;
@@ -301,7 +301,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
         }
         return num;
     }
-
+/**
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         Arbol arbol = new Arbol();
@@ -322,6 +322,6 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
         int z = arbol.profundidad(arbol);
         System.out.println(z);
     }
-
+ */
 }
 
