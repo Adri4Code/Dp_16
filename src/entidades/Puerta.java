@@ -35,6 +35,7 @@ public class Puerta {
             configurar(v, mitad + 1, ultimo);
         }
     }
+    //TODO:Funcionamiento de la puerta y pruebas de ella para acabar la EC1
 
     public static void main(String[] args) {
         Puerta p = new Puerta();
