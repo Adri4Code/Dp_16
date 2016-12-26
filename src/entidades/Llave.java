@@ -3,20 +3,24 @@ package entidades;
 /**
  * Created by adri on 18/12/16.
  */
+
+//TODO : JavaDoc
 public class Llave implements Comparable<Llave> {
     private int id;
 
-    public Llave (){
-        this.id =0;
-    }
-    public Llave(int ID){
-        this.id=ID;
-    }
-    public void setId(int ID){
-      this.id = ID;
+    public Llave() {
+        this.id = 0;
     }
 
-    public int getId(){
+    public Llave(int ID) {
+        this.id = ID;
+    }
+
+    public void setId(int ID) {
+        this.id = ID;
+    }
+
+    public int getId() {
         return this.id;
     }
 

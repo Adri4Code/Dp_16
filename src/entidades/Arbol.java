@@ -278,6 +278,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
         return res;
     }
 
+    //TODO:JavaDoc
     public int nodosInternos(Arbol<TYPE> bst) {
         int num = 0;
         int interno = 0;
