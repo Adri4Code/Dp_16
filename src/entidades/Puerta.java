@@ -3,16 +3,40 @@ package entidades;
 /**
  * Created by adri on 18/12/16.
  */
-public class Puerta {
 
+/**
+ * Implemetación de la clase Puerta
+ *
+ * @author adri
+ * @version 1.1
+ */
+public class Puerta {
+    /**
+     * Arbol de llaves , el cual , forma la cerradura de la puerta
+     */
     private Arbol<Llave> cerradura = new Arbol<Llave>();
+    /**
+     * Arbol de llaves probadas para intentar abrir la puerta
+     */
     private Arbol<Llave> probadas = new Arbol<Llave>();
+    /**
+     * Atributo que indica si la puerta esta cerrada o abierta
+     */
     private boolean abiertaCerradura = false;
+    /**
+     * Vector de llaves con el cual se forma la cerradura
+     */
     Llave[] impares = {new Llave(1), new Llave(3), new Llave(5), new Llave(7), new Llave(9),
             new Llave(11), new Llave(13), new Llave(15), new Llave(17), new Llave(19),
             new Llave(21), new Llave(23), new Llave(25), new Llave(27), new Llave(29)};
+    /**
+     * Atributo entero con el que se compara la profundidad del arbol
+     */
     private int profundidad;
 
+    /**
+     * Constructor por defecto de la Puerta
+     */
     public Puerta() {
         this.profundidad = 0;
         this.cerradura = new Arbol<Llave>();
@@ -20,15 +44,26 @@ public class Puerta {
         this.abiertaCerradura = false;
     }
 
-
+    /**
+     * Devuelve la constante que hayamos fijado para compararla con la profundidad del arbol
+     * @return profundidad
+     */
     public int getProfundidad() {
         return this.profundidad;
     }
+
+    /**
+     * Fija la constante  para compararla con la profundidad del arbol
+     * @param profundidad
+     */
 
     public void setProfundidad(int profundidad) {
         this.profundidad = profundidad;
     }
 
+    /**
+     * Método previo para configurar las llaves de la cerradura
+     */
     public void pconfigurar() {
 
         int primero = 0;
@@ -36,6 +71,12 @@ public class Puerta {
         this.configurar(this.impares, primero, ultimo);
     }
 
+    /**
+     * Configura las llaves en el orden que necesitamos para insertarlos después en nuestro arbol cerradura
+     * @param v vector de llaves
+     * @param primero primera posicion del vector
+     * @param ultimo ultima posicion del vector
+     */
     public void configurar(Llave[] v, int primero, int ultimo) {
 
         int mitad = (primero + ultimo) / 2;
@@ -49,7 +90,11 @@ public class Puerta {
     }
 
 
-    //TODO:Funcionamiento de la puerta y pruebas de ella para acabar la EC1
+    /**
+     * Prueba una llave para intentar abrir la cerradura según las condiciones impuestas
+     * @param x la llave a probar
+     * @return true || false
+     */
     public boolean probarLlave(Llave x) {
 
         //System.out.println("Altura cerradura");

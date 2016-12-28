@@ -257,7 +257,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
      * Cuenta la probundidad de un árbol binario
      *
      * @param bst el arbol en cual contamos la profundidad
-     * @return Devuelve el árbol resultante después de haber realizado el que profundidad tiene (numero de niveles de nodos)
+     * @return Devuelve el número de niveles de nodos
      */
 
     public int profundidad(Arbol<TYPE> bst) {
@@ -279,6 +279,13 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
     }
 
     //TODO:JavaDoc
+
+    /**
+     * Cuenta los nodos que no tienen nodos hijos a null
+     *
+     * @param bst el arbol que queremos contar sus nodos internos
+     * @return número de de nodos internos del arbol introducido
+     */
     public int nodosInternos(Arbol<TYPE> bst) {
         int num = 0;
         int interno = 0;
@@ -291,6 +298,11 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
         return num;
     }
 
+    /**
+     * Cuenta el número de nodos con algún hijo apuntando a null
+     * @param bst el arbol que queremos contar sus nodos finales
+     * @return número de nodos finales de un arbol
+     */
     public int nodosFinales(Arbol<TYPE> bst) {
         int num = 0;
         if (bst != null) {
@@ -304,7 +316,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
     }
 /**
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
+
         Arbol arbol = new Arbol();
         System.out.println("Ejemplos sesion árbol binario de búsqueda");
 
