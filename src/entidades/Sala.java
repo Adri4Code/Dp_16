@@ -9,9 +9,12 @@ import java.util.List;
 public class Sala {
     private int id;
     List<Llave> listaLlaves = new LinkedList<Llave>();
-    Puerta p = null;
+    private Puerta p = null;
 
-
+    public Sala() {
+        this.id = 0;
+        this.p = null;
+    }
     public Sala(int id) {
         this.id = id;
         if (id == 35) {
