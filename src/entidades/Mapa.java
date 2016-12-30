@@ -7,14 +7,14 @@ public class Mapa {
 
     private int Dim1 = 0;
     private int Dim2 = 0;
-    private Sala[][] matrizSalas;
+    private Sala[][] matrizSalas = new Sala[6][6];
 
     public Mapa() {
         this.Dim1 = 0;
         this.Dim2 = 0;
-        for (int i = 0; i < this.Dim1; i++) {
-            for (int j = 0; j < this.Dim2; j++) {
-                this.matrizSalas[i][j] = new Sala(2);
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                this.matrizSalas[i][j] = new Sala(7);
 
             }
         }
@@ -27,22 +27,13 @@ public class Mapa {
         this.Dim2 = Dim2;
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim2; j++) {
-                this.matrizSalas[i][j] = new Sala(2);
+                this.matrizSalas[i][j] = new Sala(7);
 
             }
         }
 
     }
 
-    public void setMatrizSalas2() {
-        int k = 0;
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                this.matrizSalas[i][j] = new Sala(k);
-                k++;
-            }
-        }
-    }
 
     public void setDim1(int Dim1) {
         this.Dim1 = Dim1;
@@ -60,15 +51,32 @@ public class Mapa {
         return this.Dim2;
     }
 
+    public void setMatrizSalas() {
+        int k = 0;
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                this.matrizSalas[i][j] = new Sala(k);
+                k++;
+
+            }
+        }
+    }
+
+    public int getMatrizSalas() {
+        int n = 0;
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                n = this.matrizSalas[i][j].getId();
+            }
+        }
+        return n;
+    }
+
 
     public static void main(String[] args) {
         Mapa m = new Mapa(6, 6);
-        m.setMatrizSalas(this.matrizSalas);
-        m.setMatrizSalas2();
-    }
 
-    public void setMatrizSalas(Sala[][] matrizSalas) {
-        this.matrizSalas = matrizSalas;
+
     }
 }
 
