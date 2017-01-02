@@ -33,4 +33,10 @@ public class Sala {
     public void insertarLlaveSala(Llave a) {
         this.listaLlaves.add(a);
     }
+
+    public void mostrarLlavesSala() {
+        for (int i = 0; i < listaLlaves.size(); i++) {
+            System.out.println(listaLlaves.get(i));
+        }
+    }
 }
