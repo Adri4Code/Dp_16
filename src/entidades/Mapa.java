@@ -9,6 +9,7 @@ public class Mapa {
     private int Dim2 = 0;
     private Sala[][] matrizSalas = new Sala[6][6];
     Llave[] reparto = new Llave[45];
+    private Sala salaGanadores = new Sala(1111);
 
     public Mapa() {
         this.Dim1 = 0;
@@ -19,6 +20,7 @@ public class Mapa {
 
             }
         }
+        this.salaGanadores = new Sala(1111);
 
 
     }
@@ -32,7 +34,7 @@ public class Mapa {
 
             }
         }
-
+        this.salaGanadores = new Sala(1111);
     }
 
 
@@ -71,6 +73,14 @@ public class Mapa {
             }
         }
         return n;
+    }
+
+    public Sala getSalaGanadores() {
+        return this.salaGanadores;
+    }
+
+    public void setSalaGanadores(Sala ganadores) {
+        this.salaGanadores = ganadores;
     }
 
     public void setReparto() {
