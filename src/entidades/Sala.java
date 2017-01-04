@@ -14,15 +14,21 @@ public class Sala {
     List<Llave> listaLlaves = new LinkedList<Llave>();
     Queue<Personajes> colaPersonajes = new LinkedList<Personajes>();
     private Puerta p = null;
-    private boolean existePuerta = false;
+    private boolean existePuerta;
 
     public Sala() {
         this.id = 0;
+        this.listaLlaves = new LinkedList<Llave>();
+        this.colaPersonajes = new LinkedList<Personajes>();
         this.p = null;
         this.existePuerta = false;
     }
+
     public Sala(int id) {
         this.id = id;
+        this.existePuerta = false;
+        this.listaLlaves = new LinkedList<Llave>();
+        this.colaPersonajes = new LinkedList<Personajes>();
         if (id == 35) {
             this.p = new Puerta();
             this.existePuerta = true;
@@ -37,6 +43,14 @@ public class Sala {
         this.id = id;
     }
 
+    public boolean getExistePuerta() {
+        return this.existePuerta;
+    }
+
+    public void setExistePuerta(boolean a) {
+        this.existePuerta = a;
+    }
+
     public void insertarLlaveSala(Llave a) {
         this.listaLlaves.add(a);
     }
@@ -47,8 +61,34 @@ public class Sala {
         }
     }
 
+    public Llave devolverPrimeraLlave() {
+        Llave aux = this.listaLlaves.get(0);
+        this.listaLlaves.remove(0);
+        return aux;
+    }
+
+    public boolean hayLlave() {
+        boolean existe;
+        if (this.listaLlaves.isEmpty()) {
+            existe = false;
+        } else {
+            existe = true;
+        }
+        return existe;
+    }
+
     public void insertarPersonajesSala(Personajes p) {
         this.colaPersonajes.add(p);
+    }
+
+    public boolean hayPersonaje() {
+        boolean existe;
+        if (this.colaPersonajes.isEmpty()) {
+            existe = false;
+        } else {
+            existe = true;
+        }
+        return existe;
     }
 
 }

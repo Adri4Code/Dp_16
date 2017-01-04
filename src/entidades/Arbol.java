@@ -278,8 +278,6 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
         return res;
     }
 
-    //TODO:JavaDoc
-
     /**
      * Cuenta los nodos que no tienen nodos hijos a null
      *
@@ -300,6 +298,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
 
     /**
      * Cuenta el número de nodos con algún hijo apuntando a null
+     *
      * @param bst el arbol que queremos contar sus nodos finales
      * @return número de nodos finales de un arbol
      */
@@ -315,26 +314,26 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
         return num;
     }
 /**
-    public static void main(String[] args) {
+ public static void main(String[] args) {
 
-        Arbol arbol = new Arbol();
-        System.out.println("Ejemplos sesion árbol binario de búsqueda");
+ Arbol arbol = new Arbol();
+ System.out.println("Ejemplos sesion árbol binario de búsqueda");
 
-        Integer[] datos = {new Integer(15), new Integer(7), new Integer(3),
-                new Integer(1), new Integer(5), new Integer(11),
-                new Integer(9), new Integer(13), new Integer(23), new Integer(19), new Integer(17), new Integer(21), new Integer(27), new Integer(25), new Integer(29)};
+ Integer[] datos = {new Integer(15), new Integer(7), new Integer(3),
+ new Integer(1), new Integer(5), new Integer(11),
+ new Integer(9), new Integer(13), new Integer(23), new Integer(19), new Integer(17), new Integer(21), new Integer(27), new Integer(25), new Integer(29)};
 
-        for (int i = 0; i < datos.length; i++) {
-            arbol.insertar(datos[i]);
-        }
+ for (int i = 0; i < datos.length; i++) {
+ arbol.insertar(datos[i]);
+ }
 
-        int y = arbol.nodosFinales(arbol);
-        System.out.println(y);
-        int x = arbol.nodosInternos(arbol);
-        System.out.println(x);
-        int z = arbol.profundidad(arbol);
-        System.out.println(z);
-    }
+ int y = arbol.nodosFinales(arbol);
+ System.out.println(y);
+ int x = arbol.nodosInternos(arbol);
+ System.out.println(x);
+ int z = arbol.profundidad(arbol);
+ System.out.println(z);
+ }
  */
 }
 
