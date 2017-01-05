@@ -225,7 +225,7 @@ public class Arbol<TYPE extends Comparable<TYPE>> {
                             hIzq = candidato.getHijoIzq();
                         else
                             antecesor.hDer = candidato.getHijoIzq();
-                    } //Eliminar solo ese nodo, no todo el subarbol
+                    } //Eliminar solo ese nodo, no  el subarbol
                     aborrar.hIzq = null;
                     aborrar.hDer = null;
                 }

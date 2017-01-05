@@ -147,14 +147,14 @@ public class Mapa {
 
     }
 
-
+/*
     public static void main(String[] args) {
         Mapa m = new Mapa(6, 6);
         m.setMatrizSalas();
         m.setReparto();
         m.repartirLlaves();
 
-    }
+    }*/
 }
 
 

@@ -91,4 +91,11 @@ public class Sala {
         return existe;
     }
 
+    public Personajes devolverPrimerPersonaje() {
+        Personajes aux = this.colaPersonajes.poll();
+        return aux;
+    }
+
+
+
 }
