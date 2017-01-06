@@ -13,14 +13,14 @@ public class Sala {
     private int id;
     List<Llave> listaLlaves = new LinkedList<Llave>();
     Queue<Personajes> colaPersonajes = new LinkedList<Personajes>();
-    private Puerta p = null;
+    private Puerta puerta = null;
     private boolean existePuerta;
 
     public Sala() {
         this.id = 0;
         this.listaLlaves = new LinkedList<Llave>();
         this.colaPersonajes = new LinkedList<Personajes>();
-        this.p = null;
+        this.puerta = null;
         this.existePuerta = false;
     }
 
@@ -30,7 +30,7 @@ public class Sala {
         this.listaLlaves = new LinkedList<Llave>();
         this.colaPersonajes = new LinkedList<Personajes>();
         if (id == 35) {
-            this.p = new Puerta();
+            this.puerta = new Puerta();
             this.existePuerta = true;
         }
     }
@@ -44,6 +44,11 @@ public class Sala {
     }
 
     public boolean getExistePuerta() {
+        boolean existe = false;
+        if (this.id == 35) {
+            existe = true;
+            this.existePuerta = existe;
+        }
         return this.existePuerta;
     }
 
@@ -92,10 +97,22 @@ public class Sala {
     }
 
     public Personajes devolverPrimerPersonaje() {
-        Personajes aux = this.colaPersonajes.poll();
+        Personajes aux = this.colaPersonajes.peek();
+        this.colaPersonajes.remove();
         return aux;
     }
 
+    public void probarLlaveSala(Llave llave) {
+        if (this.existePuerta) {
+            this.puerta.probarLlave(llave);
+        }
+    }
+
+    public void reconfigurarPuertaSala() {
+        if (this.existePuerta) {
+            this.puerta.pconfigurar();
+        }
+    }
 
 
 }
