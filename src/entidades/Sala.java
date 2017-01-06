@@ -1,6 +1,6 @@
 package entidades;
 
-import Personajes.Personajes;
+import Personajes.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -85,6 +85,7 @@ public class Sala {
     public void insertarPersonajesSala(Personajes p) {
         this.colaPersonajes.add(p);
     }
+
 
     public boolean hayPersonaje() {
         boolean existe;

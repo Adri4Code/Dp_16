@@ -1,5 +1,7 @@
 package entidades;
 
+import Personajes.Stark;
+
 /**
  * Created by adri on 18/12/16.
  */
@@ -147,14 +149,20 @@ public class Mapa {
 
     }
 
-/*
+    public enum Dir {S, E, N, O}
+
+    ;
+
     public static void main(String[] args) {
         Mapa m = new Mapa(6, 6);
         m.setMatrizSalas();
         m.setReparto();
         m.repartirLlaves();
+        Stark Tony = new Stark("Iron man ", 'T');
+        Dir[] direccionesStark = new Dir[]{Dir.S,};
+        Tony.movimientoPersonaje(direccionesStark);
 
-    }*/
+    }
 }
 
 
