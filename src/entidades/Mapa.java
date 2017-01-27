@@ -102,6 +102,7 @@ public class Mapa {
         }
         return existe;
     }
+
     public void setReparto() {
 
         int i = 0;
@@ -170,7 +171,8 @@ public class Mapa {
         this.turno++;
     }
 
-    public void insertarPersonajes() {
+
+    public void Simulacion() {
         Stark Tony = new Stark("Ironman", 'T');
         Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
@@ -180,10 +182,7 @@ public class Mapa {
         this.matrizSalas[0][5].insertarPersonajesSala(Bicho);
         this.matrizSalas[5][5].insertarPersonajesSala(Blake);
 
-    }
 
-    public void Simulacion() {
-        insertarPersonajes();
         //llega a su fin cuando se ha conseguido abrir la puerta o si se alcanzan 50 turnos sin que se abra
 
 
