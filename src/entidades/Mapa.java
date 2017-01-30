@@ -167,6 +167,16 @@ public class Mapa {
 
     }
 
+    public void mostrarMapa() {
+        for (int i = 0; i < getDim1(); i++) {
+            for (int j = 0; j < getDim2(); j++) {
+                System.out.println("Sala :");
+                System.out.println(this.matrizSalas[i][j].getId());
+                System.out.println();
+            }
+        }
+    }
+
     public void incrementarTurno() {
         this.turno++;
     }
@@ -181,9 +191,10 @@ public class Mapa {
         this.matrizSalas[0][0].insertarPersonajesSala(Clarke);
         this.matrizSalas[0][5].insertarPersonajesSala(Bicho);
         this.matrizSalas[5][5].insertarPersonajesSala(Blake);
+        while (this.turno < 3) {
 
-
-        //llega a su fin cuando se ha conseguido abrir la puerta o si se alcanzan 50 turnos sin que se abra
+            incrementarTurno();
+        }
 
 
     }

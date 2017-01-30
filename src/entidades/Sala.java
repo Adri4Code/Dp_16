@@ -60,9 +60,9 @@ public class Sala {
         this.listaLlaves.add(a);
     }
 
-    public void mostrarLlavesSala() {
-        for (int i = 0; i < listaLlaves.size(); i++) {
-            System.out.println(listaLlaves.get(i));
+    public void mostrarLlavesSala(Sala sala) {
+        for (int i = 0; i < sala.listaLlaves.size(); i++) {
+            System.out.println(sala.listaLlaves.get(i));
         }
     }
 
@@ -113,6 +113,12 @@ public class Sala {
         if (this.existePuerta) {
             this.puerta.pconfigurar();
         }
+    }
+
+    public void mostrarPersonajesSala(Sala sala) {
+        Personajes personajes;
+        personajes = this.colaPersonajes.poll();
+        //TODO: Mostrar los personajes de una sala
     }
 
 
