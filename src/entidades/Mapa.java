@@ -1,9 +1,6 @@
 package entidades;
 
-import Personajes.Caminante;
-import Personajes.Lannister;
 import Personajes.Stark;
-import Personajes.Targaryen;
 
 /**
  * Created by adri on 18/12/16.
@@ -177,25 +174,39 @@ public class Mapa {
         }
     }
 
+    public boolean BuscarSala(Sala sala) {
+        boolean existe = false;
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim1; j++) {
+                if (this.matrizSalas[i][j] == sala) {
+                    existe = true;
+                } else {
+                    existe = false;
+                }
+            }
+
+        }
+        return existe;
+    }
+
     public void incrementarTurno() {
         this.turno++;
     }
 
 
-    public void Simulacion() {
+    public void simulacion() {
+        int coorI = 0;
+        int coorJ = 0;
         Stark Tony = new Stark("Ironman", 'T');
-        Targaryen Clarke = new Targaryen("Emilie ", 'E');
+        /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
-        Lannister Blake = new Lannister("Griffin", 'B');
-        this.matrizSalas[0][0].insertarPersonajesSala(Tony);
-        this.matrizSalas[0][0].insertarPersonajesSala(Clarke);
-        this.matrizSalas[0][5].insertarPersonajesSala(Bicho);
-        this.matrizSalas[5][5].insertarPersonajesSala(Blake);
-        while (this.turno < 3) {
-
-            incrementarTurno();
-        }
-
+        Lannister Blake = new Lannister("Griffin", 'B');*/
+        this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
+        this.matrizSalas[0][0].mostrarPersonajeSala(matrizSalas[0][0]);
+        Dir[] S = {Dir.S, Dir.S};
+        Tony.movimientoPersonaje(S, matrizSalas, coorI, coorJ);
+        this.matrizSalas[2][0].mostrarPersonajeSala(matrizSalas[2][0]);
+        //TODO: Ver por que los personajes no se mueven , si ves que en el domingo no los has resuelto tutorias
 
     }
 
@@ -203,16 +214,12 @@ public class Mapa {
 
 
     public static void main(String[] args) {
-       /* Mapa m = new Mapa(6, 6);
+        Mapa m = new Mapa(6, 6);
         m.setMatrizSalas();
         m.setReparto();
         m.repartirLlaves();
-        Stark Tony = new Stark("Iron man ", 'T');
-        Dir[] direccionesStark = new Dir[]{Dir.S,};
-        int v = 0;
-        int k = 5;
-        Tony.movimientoPersonaje(direccionesStark, m.matrizSalas, v, k);
-*/
+        m.simulacion();
+
 
     }
 }

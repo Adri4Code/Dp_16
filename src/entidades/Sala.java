@@ -89,18 +89,24 @@ public class Sala {
 
     public boolean hayPersonaje() {
         boolean existe;
-        if (this.colaPersonajes.isEmpty()) {
-            existe = false;
-        } else {
+        if (!this.colaPersonajes.isEmpty()) {
             existe = true;
+        } else {
+            existe = false;
         }
         return existe;
     }
 
     public Personajes devolverPrimerPersonaje() {
-        Personajes aux = this.colaPersonajes.peek();
-        this.colaPersonajes.remove();
-        return aux;
+        return this.colaPersonajes.poll();
+    }
+
+    public void mostrarPersonajeSala(Sala sala) {
+        if (sala.hayPersonaje())
+            System.out.println(this.colaPersonajes.element());
+        else {
+            System.out.println("No hay ningún personaje en la sala");
+        }
     }
 
     public void probarLlaveSala(Llave llave) {
@@ -113,12 +119,6 @@ public class Sala {
         if (this.existePuerta) {
             this.puerta.pconfigurar();
         }
-    }
-
-    public void mostrarPersonajesSala(Sala sala) {
-        Personajes personajes;
-        personajes = this.colaPersonajes.poll();
-        //TODO: Mostrar los personajes de una sala
     }
 
 
