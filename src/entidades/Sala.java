@@ -102,8 +102,8 @@ public class Sala {
     }
 
     public void mostrarPersonajeSala(Sala sala) {
-        if (sala.hayPersonaje())
-            System.out.println(this.colaPersonajes.element());
+        if (sala.hayPersonaje() && this.colaPersonajes != null)
+            System.out.println(this.colaPersonajes.peek());
         else {
             System.out.println("No hay ningún personaje en la sala");
         }

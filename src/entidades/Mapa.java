@@ -169,7 +169,10 @@ public class Mapa {
             for (int j = 0; j < getDim2(); j++) {
                 System.out.println("Sala :");
                 System.out.println(this.matrizSalas[i][j].getId());
+                this.matrizSalas[i][j].mostrarPersonajeSala(this.matrizSalas[i][j]);
                 System.out.println();
+
+
             }
         }
     }
@@ -195,18 +198,18 @@ public class Mapa {
 
 
     public void simulacion() {
-        int coorI = 0;
+        int coorI = 2;
         int coorJ = 0;
+        Dir[] S = {Dir.N, Dir.S};
         Stark Tony = new Stark("Ironman", 'T');
         /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
         Lannister Blake = new Lannister("Griffin", 'B');*/
         this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
-        this.matrizSalas[0][0].mostrarPersonajeSala(matrizSalas[0][0]);
-        Dir[] S = {Dir.S, Dir.S};
-        Tony.movimientoPersonaje(S, matrizSalas, coorI, coorJ);
-        this.matrizSalas[2][0].mostrarPersonajeSala(matrizSalas[2][0]);
-        //TODO: Ver por que los personajes no se mueven , si ves que en el domingo no los has resuelto tutorias
+
+        Tony.movimientoPersonaje(S, this.matrizSalas, coorI, coorJ);
+//TODO: Probar con solo una dirección en ve de un vector de direeciones para ver si hace más de un movimiento,sino Martes/Lunes tutorías
+
 
     }
 
@@ -215,10 +218,13 @@ public class Mapa {
 
     public static void main(String[] args) {
         Mapa m = new Mapa(6, 6);
+
         m.setMatrizSalas();
         m.setReparto();
-        m.repartirLlaves();
+
+        // m.repartirLlaves();
         m.simulacion();
+        m.mostrarMapa();
 
 
     }
