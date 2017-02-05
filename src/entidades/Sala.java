@@ -101,8 +101,8 @@ public class Sala {
         return this.colaPersonajes.poll();
     }
 
-    public void mostrarPersonajeSala(Sala sala) {
-        if (sala.hayPersonaje() && this.colaPersonajes != null)
+    public void mostrarPersonajeSala() {
+        if (hayPersonaje() && this.colaPersonajes != null)
             System.out.println(this.colaPersonajes.peek());
         else {
             System.out.println("No hay ningún personaje en la sala");

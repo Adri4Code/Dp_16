@@ -169,7 +169,7 @@ public class Mapa {
             for (int j = 0; j < getDim2(); j++) {
                 System.out.println("Sala :");
                 System.out.println(this.matrizSalas[i][j].getId());
-                this.matrizSalas[i][j].mostrarPersonajeSala(this.matrizSalas[i][j]);
+                this.matrizSalas[i][j].mostrarPersonajeSala();
                 System.out.println();
 
 
@@ -199,8 +199,8 @@ public class Mapa {
 
     public void simulacion() {
         int coorI = 2;
-        int coorJ = 0;
-        Dir[] S = {Dir.N, Dir.S};
+        int coorJ = 1;
+        Dir[] S = {Dir.O, Dir.S, Dir.N, Dir.S, Dir.E};
         Stark Tony = new Stark("Ironman", 'T');
         /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
@@ -208,7 +208,7 @@ public class Mapa {
         this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
 
         Tony.movimientoPersonaje(S, this.matrizSalas, coorI, coorJ);
-//TODO: Probar con solo una dirección en ve de un vector de direeciones para ver si hace más de un movimiento,sino Martes/Lunes tutorías
+//TODO:Hacer distintas pruebas con los personajes para ver si realizan bien sus acciones con el movimiento y ya estaría finalizada ec2
 
 
     }
