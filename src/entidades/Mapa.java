@@ -100,7 +100,7 @@ public class Mapa {
         return existe;
     }
 
-    public void setReparto() {
+    public void prepararReparto() {
 
         int i = 0;
         int j = 0;
@@ -198,9 +198,9 @@ public class Mapa {
 
 
     public void simulacion() {
-        int coorI = 2;
-        int coorJ = 1;
-        Dir[] S = {Dir.O, Dir.S, Dir.N, Dir.S, Dir.E};
+        int coorI = 0;
+        int coorJ = 0;
+        Dir[] S = {Dir.E, Dir.E, Dir.E, Dir.E, Dir.E};
         Stark Tony = new Stark("Ironman", 'T');
         /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
@@ -208,6 +208,8 @@ public class Mapa {
         this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
 
         Tony.movimientoPersonaje(S, this.matrizSalas, coorI, coorJ);
+        Tony.recogerLlave(matrizSalas[coorI][coorJ]);
+        Tony.mostrarLlavesStark();
 //TODO:Hacer distintas pruebas con los personajes para ver si realizan bien sus acciones con el movimiento y ya estaría finalizada ec2
 
 
@@ -220,11 +222,11 @@ public class Mapa {
         Mapa m = new Mapa(6, 6);
 
         m.setMatrizSalas();
-        m.setReparto();
+        m.prepararReparto();
 
-        // m.repartirLlaves();
+        m.repartirLlaves();
         m.simulacion();
-        m.mostrarMapa();
+        // m.mostrarMapa();
 
 
     }
