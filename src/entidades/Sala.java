@@ -60,9 +60,13 @@ public class Sala {
         this.listaLlaves.add(a);
     }
 
-    public void mostrarLlavesSala(Sala sala) {
-        for (int i = 0; i < sala.listaLlaves.size(); i++) {
-            System.out.println(sala.listaLlaves.get(i));
+    public void mostrarLlavesSala() {
+        if (!this.listaLlaves.isEmpty()) {
+            for (int i = 0; i < this.listaLlaves.size(); i++) {
+                System.out.println(this.listaLlaves.get(i));
+            }
+        } else {
+            System.out.println("No hay llaves en esta Sala");
         }
     }
 
@@ -73,13 +77,13 @@ public class Sala {
     }
 
     public boolean hayLlave() {
-        boolean existe;
-        if (this.listaLlaves.isEmpty()) {
-            existe = false;
+        //True cuando hay llaves
+        //False cuando no hay llaves
+        if (!this.listaLlaves.isEmpty()) {
+            return true;
         } else {
-            existe = true;
+            return false;
         }
-        return existe;
     }
 
     public void insertarPersonajesSala(Personajes p) {
@@ -113,6 +117,10 @@ public class Sala {
         if (this.existePuerta) {
             this.puerta.probarLlave(llave);
         }
+    }
+
+    public boolean estadoPuerta() {
+        return this.puerta.getEstadoPuerta();
     }
 
     public void reconfigurarPuertaSala() {

@@ -62,6 +62,24 @@ public class Puerta {
     }
 
     /**
+     * Devuelve el estado de la puerta si esta abierta o cerrada
+     *
+     * @return el estado de mi puerta
+     */
+    public boolean getEstadoPuerta() {
+        return this.abiertaCerradura;
+    }
+
+    /**
+     * Fijamos como queremos que este la puerta cerrada o abierta
+     *
+     * @param estadoPuerta
+     */
+    public void setEstadoPuerta(boolean estadoPuerta) {
+        this.abiertaCerradura = estadoPuerta;
+    }
+
+    /**
      * Método previo para configurar las llaves de la cerradura
      */
     public void pconfigurar() {

@@ -170,6 +170,7 @@ public class Mapa {
                 System.out.println("Sala :");
                 System.out.println(this.matrizSalas[i][j].getId());
                 this.matrizSalas[i][j].mostrarPersonajeSala();
+                this.matrizSalas[i][j].mostrarLlavesSala();
                 System.out.println();
 
 
@@ -200,15 +201,13 @@ public class Mapa {
     public void simulacion() {
         int coorI = 0;
         int coorJ = 0;
-        Dir[] S = {Dir.E, Dir.E, Dir.E, Dir.E, Dir.E};
+        Dir[] S = {Dir.E, Dir.E, Dir.E};
         Stark Tony = new Stark("Ironman", 'T');
         /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
         Lannister Blake = new Lannister("Griffin", 'B');*/
         this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
-
-        Tony.movimientoPersonaje(S, this.matrizSalas, coorI, coorJ);
-        Tony.recogerLlave(matrizSalas[coorI][coorJ]);
+        Tony.accionesStark(S, this.matrizSalas, coorI, coorJ);
         Tony.mostrarLlavesStark();
 //TODO:Hacer distintas pruebas con los personajes para ver si realizan bien sus acciones con el movimiento y ya estaría finalizada ec2
 
@@ -226,7 +225,7 @@ public class Mapa {
 
         m.repartirLlaves();
         m.simulacion();
-        // m.mostrarMapa();
+        m.mostrarMapa();
 
 
     }
