@@ -77,8 +77,7 @@ public class Sala {
     }
 
     public boolean hayLlave() {
-        //True cuando hay llaves
-        //False cuando no hay llaves
+
         if (!this.listaLlaves.isEmpty()) {
             return true;
         } else {
