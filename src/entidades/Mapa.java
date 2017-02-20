@@ -90,11 +90,11 @@ public class Mapa {
         boolean existe = false;
         for (int i = 0; i < this.getDim1(); i++) {
             for (int j = 0; j < this.getDim2(); j++) {
-                if (id == this.matrizSalas[i][j].getId()) {
+                if (id == this.matrizSalas[i][j].getId())
                     existe = true;
-                } else {
+                else
                     existe = false;
-                }
+
             }
         }
         return existe;
@@ -169,11 +169,11 @@ public class Mapa {
         for (int i = 0; i < getDim1(); i++) {
             for (int j = 0; j < getDim2(); j++) {
                 System.out.println("Sala :");
-                System.out.println(this.matrizSalas[i][j].getId());
+                if (this.matrizSalas[i][j].existeSala())
+                    System.out.println(this.matrizSalas[i][j].getId());
                 this.matrizSalas[i][j].mostrarPersonajeSala();
-                if (this.matrizSalas[i][j].hayLlave()) {
+                if (this.matrizSalas[i][j].hayLlave())
                     System.out.println("Hay Llaves en esta sala");
-                }
                 System.out.println();
 
 
@@ -185,11 +185,11 @@ public class Mapa {
         boolean existe = false;
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim1; j++) {
-                if (this.matrizSalas[i][j] == sala) {
+                if (this.matrizSalas[i][j] == sala)
                     existe = true;
-                } else {
+                else
                     existe = false;
-                }
+
             }
 
         }
@@ -203,15 +203,18 @@ public class Mapa {
 
     public void simulacion() {
         int coorI = 0;
-        int coorJ = 2;
-        Dir[] S = {Dir.E, Dir.E};
+        int coorJ = 0;
+        Dir[] S = {Dir.E, Dir.E, Dir.E, Dir.E, Dir.E};
         Stark Tony = new Stark("Ironman", 'T');
         /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
         Lannister Blake = new Lannister("Griffin", 'B');*/
         this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
-        Tony.accionesStark(S, this.matrizSalas, coorI, coorJ);
-//TODO:Hacer distintas pruebas con los personajes para ver si realizan bien sus acciones con el movimiento y ya estaría finalizada ec2
+
+        Tony.accionesPersonaje(S, this.matrizSalas, coorI, coorJ);
+
+
+//TODO:Pensar como solucionar el recorrido infinito de la matriz, antes del miercóles
 
 
     }
@@ -225,7 +228,7 @@ public class Mapa {
         m.setMatrizSalas();
         m.prepararReparto();
         m.simulacion();
-        // m.mostrarMapa();
+        m.mostrarMapa();
 
 
     }

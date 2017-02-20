@@ -101,7 +101,11 @@ public class Sala {
     }
 
     public Personajes devolverPrimerPersonaje() {
-        return this.colaPersonajes.poll();
+        Personajes p = null;
+        if (!this.colaPersonajes.isEmpty()) {
+            p = this.colaPersonajes.poll();
+        }
+        return p;
     }
 
     public void mostrarPersonajeSala() {
@@ -127,6 +131,17 @@ public class Sala {
             this.puerta.pconfigurar();
         }
     }
+
+    public boolean existeSala() {
+        boolean existe = false;
+        if (this.id > 0 && this.id < 36)
+            existe = true;
+        else
+            existe = false;
+
+        return existe;
+    }
+    //TODO:Métdo existe puerta
 
 
 }
