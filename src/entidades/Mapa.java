@@ -210,8 +210,8 @@ public class Mapa {
         Caminante Bicho = new Caminante("Cr7", 'C');
         Lannister Blake = new Lannister("Griffin", 'B');*/
         this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
-
-        Tony.accionesPersonaje(S, this.matrizSalas, coorI, coorJ);
+        int i = -1;
+        Tony.accionesPersonaje(S[i], this.matrizSalas, coorI, coorJ, i);
 
 
 //TODO:Pensar como solucionar el recorrido infinito de la matriz, antes del miercóles
@@ -228,7 +228,7 @@ public class Mapa {
         m.setMatrizSalas();
         m.prepararReparto();
         m.simulacion();
-        m.mostrarMapa();
+        //  m.mostrarMapa();
 
 
     }
