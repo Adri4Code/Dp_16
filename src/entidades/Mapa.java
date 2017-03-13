@@ -202,19 +202,15 @@ public class Mapa {
 
 
     public void simulacion() {
-        int coorI = 0;
-        int coorJ = 0;
-        Dir[] S = {Dir.E, Dir.E, Dir.E, Dir.E, Dir.E};
+
+
         Stark Tony = new Stark("Ironman", 'T');
         /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
         Caminante Bicho = new Caminante("Cr7", 'C');
         Lannister Blake = new Lannister("Griffin", 'B');*/
-        this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Tony);
-        int i = -1;
-        Tony.accionesPersonaje(S[i], this.matrizSalas, coorI, coorJ, i);
 
 
-//TODO:Pensar como solucionar el recorrido infinito de la matriz, antes del miercóles
+//TODO:Volver a hacer la estructura de los personajes jajaa
 
 
     }
@@ -228,7 +224,7 @@ public class Mapa {
         m.setMatrizSalas();
         m.prepararReparto();
         m.simulacion();
-        //  m.mostrarMapa();
+        m.mostrarMapa();
 
 
     }
