@@ -61,9 +61,11 @@ public class Sala {
     }
 
     public void mostrarLlavesSala() {
+        Llave aux;
         if (!this.listaLlaves.isEmpty()) {
             for (int i = 0; i < this.listaLlaves.size(); i++) {
-                System.out.println(this.listaLlaves.get(i));
+                aux = this.listaLlaves.get(i);
+                System.out.println(aux.getId());
             }
         } else {
             System.out.println("No hay llaves en esta Sala");
@@ -141,6 +143,7 @@ public class Sala {
 
         return existe;
     }
+
     //TODO:Métdo existe puerta
 
 

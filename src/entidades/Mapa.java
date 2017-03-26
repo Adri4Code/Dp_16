@@ -1,6 +1,6 @@
 package entidades;
 
-import Personajes.Stark;
+import Personajes.*;
 
 /**
  * Created by adri on 18/12/16.
@@ -14,6 +14,7 @@ public class Mapa {
     private Sala salaGanadores = new Sala(1111);
     private int turno = 0;
 
+
     public Mapa() {
         this.Dim1 = 0;
         this.Dim2 = 0;
@@ -24,6 +25,7 @@ public class Mapa {
             }
         }
         this.salaGanadores = new Sala(1111);
+        this.turno = 0;
 
 
     }
@@ -38,6 +40,7 @@ public class Mapa {
             }
         }
         this.salaGanadores = new Sala(1111);
+        this.turno = 0;
     }
 
 
@@ -84,6 +87,14 @@ public class Mapa {
 
     public void setSalaGanadores(Sala ganadores) {
         this.salaGanadores = ganadores;
+    }
+
+    public int getTurno() {
+        return this.turno;
+    }
+
+    public void setTurno(int _turno) {
+        this.turno = _turno;
     }
 
     public boolean haySala(int id) {
@@ -196,24 +207,38 @@ public class Mapa {
         return existe;
     }
 
+    public void crearYSituarPersonajes() {
+        Targaryen Daenerys = new Targaryen("Daenerys", 'D');
+        this.matrizSalas[0][0].insertarPersonajesSala(Daenerys);
+        Stark Arya = new Stark("Arya", 'A');
+        this.matrizSalas[0][0].insertarPersonajesSala(Arya);
+        Caminante White = new Caminante("White", 'W');
+        this.matrizSalas[5][0].insertarPersonajesSala(White);
+        Lannister Tyrion = new Lannister("Tyrion", 'T');
+        this.matrizSalas[5][5].insertarPersonajesSala(Tyrion);
+
+    }
+
+    public void ordenPersonajesYTurnos() {
+        //TODO:Hacer el formato como en la EC2
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                if (this.matrizSalas[i][j].getId() == 35) {
+                    if (this.matrizSalas[i][j].hayPersonaje()) {
+                        //Personajes.procesarAccionesPersonaje
+                    }
+
+                    incrementarTurno();
+
+                }
+            }
+        }
+    }
+
     public void incrementarTurno() {
         this.turno++;
     }
 
-
-    public void simulacion() {
-
-
-        Stark Tony = new Stark("Ironman", 'T');
-        /*Targaryen Clarke = new Targaryen("Emilie ", 'E');
-        Caminante Bicho = new Caminante("Cr7", 'C');
-        Lannister Blake = new Lannister("Griffin", 'B');*/
-
-
-//TODO:Volver a hacer la estructura de los personajes jajaa
-
-
-    }
 
     public enum Dir {S, E, N, O}
 
@@ -223,8 +248,10 @@ public class Mapa {
 
         m.setMatrizSalas();
         m.prepararReparto();
-        m.simulacion();
+        m.crearYSituarPersonajes();
+        m.ordenPersonajesYTurnos();
         m.mostrarMapa();
+        // m.simulacion();
 
 
     }
