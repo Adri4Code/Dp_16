@@ -177,11 +177,15 @@ public class Mapa {
     }
 
     public void mostrarMapa() {
+        System.out.println("(turno: " + this.getTurno() + " )");
+        System.out.println("(mapa : " + this.devolverSalaConPuerta() + ")");
+        System.out.println("(puerta:" + this.buscarPuertaYMostrarEstado());//mostrar altura de apertura , llaves cerradura, llaves probadas
         for (int i = 0; i < getDim1(); i++) {
             for (int j = 0; j < getDim2(); j++) {
-                System.out.println("Sala :");
                 if (this.matrizSalas[i][j].existeSala())
-                    System.out.println(this.matrizSalas[i][j].getId());
+                    //System.out.println("Sala :"+ this.matrizSalas[i][j].getId() +":"+ this.matrizSalas[i][j].mostrarLlavesSala());
+                    //TODO:Haber que hcaemos aqui
+
                 this.matrizSalas[i][j].mostrarPersonajeSala();
                 if (this.matrizSalas[i][j].hayLlave())
                     System.out.println("Hay Llaves en esta sala");
@@ -190,6 +194,34 @@ public class Mapa {
 
             }
         }
+    }
+
+    public String buscarPuertaYMostrarEstado() {
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                if (this.matrizSalas[i][j].getExistePuerta()) {
+                    if (this.matrizSalas[i][j].estadoPuerta()) {
+                        return "abierta";
+                    } else {
+                        return "cerrada";
+                    }
+                }
+            }
+        }
+        return "no se ha encontrado la puerta";
+    }
+
+    public int devolverSalaConPuerta() {
+        int x = 0;
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                if (this.matrizSalas[i][j].getExistePuerta()) {
+                    x = this.matrizSalas[i][j].getId();
+
+                }
+            }
+        }
+        return x;
     }
 
     public boolean BuscarSala(Sala sala) {
