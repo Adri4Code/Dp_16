@@ -66,6 +66,7 @@ public class Sala {
             for (int i = 0; i < this.listaLlaves.size(); i++) {
                 aux = this.listaLlaves.get(i);
                 System.out.println(aux.getId());
+
             }
         } else {
             System.out.println("No hay llaves en esta Sala");
@@ -143,8 +144,6 @@ public class Sala {
 
         return existe;
     }
-
-    //TODO:Métdo existe puerta
 
 
 }

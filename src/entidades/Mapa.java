@@ -1,6 +1,6 @@
 package entidades;
 
-import Personajes.*;
+import Personajes.Targaryen;
 
 /**
  * Created by adri on 18/12/16.
@@ -183,8 +183,9 @@ public class Mapa {
         for (int i = 0; i < getDim1(); i++) {
             for (int j = 0; j < getDim2(); j++) {
                 if (this.matrizSalas[i][j].existeSala())
-                    //System.out.println("Sala :"+ this.matrizSalas[i][j].getId() +":"+ this.matrizSalas[i][j].mostrarLlavesSala());
+                    System.out.println("Sala :" + this.matrizSalas[i][j].getId());
                     //TODO:Haber que hcaemos aqui
+                this.matrizSalas[i][j].mostrarLlavesSala();
 
                 this.matrizSalas[i][j].mostrarPersonajeSala();
                 if (this.matrizSalas[i][j].hayLlave())
@@ -240,39 +241,56 @@ public class Mapa {
     }
 
     public void crearYSituarPersonajes() {
-        Targaryen Daenerys = new Targaryen("Daenerys", 'D');
-        this.matrizSalas[0][0].insertarPersonajesSala(Daenerys);
-        Stark Arya = new Stark("Arya", 'A');
+        /*Targaryen Daenerys = new Targaryen("Daenerys", 'D', 0);
+        this.matrizSalas[0][0].insertarPersonajesSala(Daenerys);*/
+       /* Stark Arya = new Stark("Arya", 'A', 0);
         this.matrizSalas[0][0].insertarPersonajesSala(Arya);
-        Caminante White = new Caminante("White", 'W');
+        Caminante White = new Caminante("White", 'W', 0);
         this.matrizSalas[5][0].insertarPersonajesSala(White);
-        Lannister Tyrion = new Lannister("Tyrion", 'T');
-        this.matrizSalas[5][5].insertarPersonajesSala(Tyrion);
+        Lannister Tyrion = new Lannister("Tyrion", 'T', 0);
+        this.matrizSalas[5][5].insertarPersonajesSala(Tyrion);*/
 
     }
 
-    public void ordenPersonajesYTurnos() {
-        //TODO:Hacer el formato como en la EC2
+    public void ordenMoverYActuar() {
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim2; j++) {
-                if (this.matrizSalas[i][j].getId() == 35) {
-                    if (this.matrizSalas[i][j].hayPersonaje()) {
-                        //Personajes.procesarAccionesPersonaje
-                    }
-
-                    incrementarTurno();
-
+                while (this.matrizSalas[i][j].hayPersonaje()) {
+                    //accionespersonaje
                 }
             }
         }
     }
 
+
+    public void simulacion() {
+        while (this.turno <= 50 || this.matrizSalas[5][5].estadoPuerta() == true) {
+            incrementarTurno();
+
+        }
+    }
+
+
     public void incrementarTurno() {
         this.turno++;
     }
 
-
     public enum Dir {S, E, N, O}
+
+
+    public void pruebaRuta() {
+        int coorI = 0;
+        int coorJ = 0;
+        Targaryen Daenerys = new Targaryen("Daenerys", 'D', 0);
+        Dir[] direccionesT = new Dir[]{Dir.S, Dir.E, Dir.S, Dir.E, Dir.E};
+        this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Daenerys);
+        Daenerys.asignarRuta(direccionesT);
+
+        Daenerys.accionesPersonaje(this.matrizSalas, coorI, coorJ);
+        //TODO:Debugging machine
+
+
+    }
 
 
     public static void main(String[] args) {
@@ -281,7 +299,9 @@ public class Mapa {
         m.setMatrizSalas();
         m.prepararReparto();
         m.crearYSituarPersonajes();
-        m.ordenPersonajesYTurnos();
+
+        m.pruebaRuta();
+
         m.mostrarMapa();
         // m.simulacion();
 
