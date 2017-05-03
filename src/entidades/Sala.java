@@ -15,6 +15,7 @@ public class Sala {
     Queue<Personajes> colaPersonajes = new LinkedList<Personajes>();
     private Puerta puerta = null;
     private boolean existePuerta;
+    private int[] coordenadas;
 
     public Sala() {
         this.id = 0;
@@ -22,6 +23,11 @@ public class Sala {
         this.colaPersonajes = new LinkedList<Personajes>();
         this.puerta = null;
         this.existePuerta = false;
+        this.coordenadas = new int[2];
+        for (int i = 0; i < this.coordenadas.length; i++) {
+            this.coordenadas[i] = 0;
+        }
+
     }
 
     public Sala(int id) {
@@ -32,6 +38,10 @@ public class Sala {
         if (id == 35) {
             this.puerta = new Puerta();
             this.existePuerta = true;
+        }
+        this.coordenadas = new int[2];
+        for (int i = 0; i < this.coordenadas.length; i++) {
+            this.coordenadas[i] = 0;
         }
     }
 
@@ -143,6 +153,21 @@ public class Sala {
             existe = false;
 
         return existe;
+    }
+
+    public int[] getCoordenadas() {
+
+        return this.coordenadas;
+    }
+
+    public void setCoordenadas(int i, int j) {
+        this.coordenadas[0] = i;
+        this.coordenadas[1] = j;
+
+    }
+
+    public void mostrarCoordenadas() {
+        System.out.println("Coordenada I" + this.coordenadas[0] + "Coordenada J:" + this.coordenadas[1]);
     }
 
 

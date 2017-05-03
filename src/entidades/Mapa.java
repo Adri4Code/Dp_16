@@ -9,18 +9,19 @@ public class Mapa {
 
     private int Dim1 = 0;
     private int Dim2 = 0;
-    private Sala[][] matrizSalas = new Sala[6][6];
-    Llave[] reparto = new Llave[45];
+    private Sala[][] matrizSalas = null;
+
     private Sala salaGanadores = new Sala(1111);
     private int turno = 0;
+    private static Mapa mapa = null;
 
-
-    public Mapa() {
+    //Constructores
+    private Mapa() {
         this.Dim1 = 0;
         this.Dim2 = 0;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                this.matrizSalas[i][j] = new Sala(7);
+                matrizSalas[i][j] = new Sala(7);
 
             }
         }
@@ -30,20 +31,35 @@ public class Mapa {
 
     }
 
-    public Mapa(int Dim1, int Dim2) {
+    public static Mapa getInstanciaMapa() {
+        if (mapa == null) {
+            mapa = new Mapa();
+        }
+        return mapa;
+    }
+
+
+    private Mapa(int Dim1, int Dim2) {
         this.Dim1 = Dim1;
         this.Dim2 = Dim2;
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim2; j++) {
-                this.matrizSalas[i][j] = new Sala(7);
-
+                // matrizSalas[i][j] = new Sala(7);
+                getInstanciaMapa();
             }
         }
         this.salaGanadores = new Sala(1111);
         this.turno = 0;
     }
 
+    public static Mapa getMapaDim(int dim1, int dim2) {
+        if (mapa == null) {
+            mapa = new Mapa(dim1, dim2);
+        }
+        return mapa;
+    }
 
+    //Getters and Setters
     public void setDim1(int Dim1) {
         this.Dim1 = Dim1;
     }
@@ -64,21 +80,12 @@ public class Mapa {
         int k = 0;
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim2; j++) {
-                this.matrizSalas[i][j] = new Sala(k);
+                matrizSalas[i][j] = new Sala(k);
+                matrizSalas[i][j].setCoordenadas(i, j);
                 k++;
 
             }
         }
-    }
-
-    public int getMatrizSalas() {
-        int n = 0;
-        for (int i = 0; i < this.Dim1; i++) {
-            for (int j = 0; j < this.Dim2; j++) {
-                n = this.matrizSalas[i][j].getId();
-            }
-        }
-        return n;
     }
 
     public Sala getSalaGanadores() {
@@ -97,11 +104,13 @@ public class Mapa {
         this.turno = _turno;
     }
 
+
+    //Módulos para distintas acciones
     public boolean haySala(int id) {
         boolean existe = false;
         for (int i = 0; i < this.getDim1(); i++) {
             for (int j = 0; j < this.getDim2(); j++) {
-                if (id == this.matrizSalas[i][j].getId())
+                if (id == matrizSalas[i][j].getId())
                     existe = true;
                 else
                     existe = false;
@@ -112,69 +121,67 @@ public class Mapa {
     }
 
     public void prepararReparto() {
+        Llave[] reparto = new Llave[45];
 
         int i = 0;
         int j = 0;
         while (i < 45) {
             if (j % 2 != 0) {
-                this.reparto[i] = new Llave(j);
+                reparto[i] = new Llave(j);
                 i++;
-                this.reparto[i] = new Llave(j);
+                reparto[i] = new Llave(j);
                 j++;
                 i++;
             } else {
-                this.reparto[i] = new Llave(j);
+                reparto[i] = new Llave(j);
                 i++;
                 j++;
             }
 
         }
-        repartirLlaves();
-
-    }
-
-    public void repartirLlaves() {
-        for (int i = 0; i < reparto.length; i++) {
-            if (i >= 0 && i < 5) {
-                this.matrizSalas[0][3].insertarLlaveSala(this.reparto[i]);
+        for (int k = 0; k < reparto.length; k++) {
+            if (k >= 0 && k < 5) {
+                matrizSalas[0][3].insertarLlaveSala(reparto[k]);
 
             }
-            if (i >= 5 && i < 10) {
-                this.matrizSalas[0][4].insertarLlaveSala(this.reparto[i]);
+            if (k >= 5 && k < 10) {
+                matrizSalas[0][4].insertarLlaveSala(reparto[k]);
 
             }
-            if (i >= 10 && i < 15) {
+            if (k >= 10 && k < 15) {
 
-                this.matrizSalas[1][0].insertarLlaveSala(this.reparto[i]);
+                matrizSalas[1][0].insertarLlaveSala(reparto[k]);
             }
-            if (i >= 15 && i < 20) {
-                this.matrizSalas[1][2].insertarLlaveSala(this.reparto[i]);
+            if (k >= 15 && k < 20) {
+                matrizSalas[1][2].insertarLlaveSala(reparto[k]);
 
             }
-            if (i >= 20 && i < 25) {
+            if (k >= 20 && k < 25) {
 
-                this.matrizSalas[1][3].insertarLlaveSala(this.reparto[i]);
+                matrizSalas[1][3].insertarLlaveSala(reparto[k]);
             }
-            if (i >= 25 && i < 30) {
+            if (k >= 25 && k < 30) {
 
-                this.matrizSalas[1][4].insertarLlaveSala(this.reparto[i]);
+                matrizSalas[1][4].insertarLlaveSala(reparto[k]);
             }
-            if (i >= 30 && i < 35) {
+            if (k >= 30 && k < 35) {
 
-                this.matrizSalas[1][5].insertarLlaveSala(this.reparto[i]);
+                matrizSalas[1][5].insertarLlaveSala(reparto[k]);
             }
-            if (i >= 35 && i < 40) {
+            if (k >= 35 && k < 40) {
 
-                this.matrizSalas[2][0].insertarLlaveSala(this.reparto[i]);
+                matrizSalas[2][0].insertarLlaveSala(reparto[k]);
             }
-            if (i >= 40 && i < 45) {
-                this.matrizSalas[2][1].insertarLlaveSala(this.reparto[i]);
+            if (k >= 40 && k < 45) {
+                matrizSalas[2][1].insertarLlaveSala(reparto[k]);
 
             }
 
         }
 
+
     }
+
 
     public void mostrarMapa() {
         System.out.println("(turno: " + this.getTurno() + " )");
@@ -182,15 +189,14 @@ public class Mapa {
         System.out.println("(puerta:" + this.buscarPuertaYMostrarEstado());//mostrar altura de apertura , llaves cerradura, llaves probadas
         for (int i = 0; i < getDim1(); i++) {
             for (int j = 0; j < getDim2(); j++) {
-                if (this.matrizSalas[i][j].existeSala())
-                    System.out.println("Sala :" + this.matrizSalas[i][j].getId());
-                    //TODO:Haber que hcaemos aqui
-                this.matrizSalas[i][j].mostrarLlavesSala();
-
-                this.matrizSalas[i][j].mostrarPersonajeSala();
-                if (this.matrizSalas[i][j].hayLlave())
-                    System.out.println("Hay Llaves en esta sala");
-                System.out.println();
+                if (matrizSalas[i][j].existeSala())
+                    System.out.println("Sala :" + matrizSalas[i][j].getId());
+                // matrizSalas[i][j].mostrarCoordenadas();
+                //matrizSalas[i][j].mostrarLlavesSala();
+                matrizSalas[i][j].mostrarPersonajeSala();
+                if (matrizSalas[i][j].hayLlave())
+                    //    System.out.println("Hay Llaves en esta sala");
+                    System.out.println();
 
 
             }
@@ -200,8 +206,8 @@ public class Mapa {
     public String buscarPuertaYMostrarEstado() {
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim2; j++) {
-                if (this.matrizSalas[i][j].getExistePuerta()) {
-                    if (this.matrizSalas[i][j].estadoPuerta()) {
+                if (matrizSalas[i][j].getExistePuerta()) {
+                    if (matrizSalas[i][j].estadoPuerta()) {
                         return "abierta";
                     } else {
                         return "cerrada";
@@ -216,8 +222,8 @@ public class Mapa {
         int x = 0;
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim2; j++) {
-                if (this.matrizSalas[i][j].getExistePuerta()) {
-                    x = this.matrizSalas[i][j].getId();
+                if (matrizSalas[i][j].getExistePuerta()) {
+                    x = matrizSalas[i][j].getId();
 
                 }
             }
@@ -229,7 +235,7 @@ public class Mapa {
         boolean existe = false;
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim1; j++) {
-                if (this.matrizSalas[i][j] == sala)
+                if (matrizSalas[i][j] == sala)
                     existe = true;
                 else
                     existe = false;
@@ -242,20 +248,20 @@ public class Mapa {
 
     public void crearYSituarPersonajes() {
         /*Targaryen Daenerys = new Targaryen("Daenerys", 'D', 0);
-        this.matrizSalas[0][0].insertarPersonajesSala(Daenerys);*/
+        matrizSalas[0][0].insertarPersonajesSala(Daenerys);*/
        /* Stark Arya = new Stark("Arya", 'A', 0);
-        this.matrizSalas[0][0].insertarPersonajesSala(Arya);
+        matrizSalas[0][0].insertarPersonajesSala(Arya);
         Caminante White = new Caminante("White", 'W', 0);
-        this.matrizSalas[5][0].insertarPersonajesSala(White);
+        matrizSalas[5][0].insertarPersonajesSala(White);
         Lannister Tyrion = new Lannister("Tyrion", 'T', 0);
-        this.matrizSalas[5][5].insertarPersonajesSala(Tyrion);*/
+        matrizSalas[5][5].insertarPersonajesSala(Tyrion);*/
 
     }
 
     public void ordenMoverYActuar() {
         for (int i = 0; i < this.Dim1; i++) {
             for (int j = 0; j < this.Dim2; j++) {
-                while (this.matrizSalas[i][j].hayPersonaje()) {
+                while (matrizSalas[i][j].hayPersonaje()) {
                     //accionespersonaje
                 }
             }
@@ -264,10 +270,13 @@ public class Mapa {
 
 
     public void simulacion() {
-        while (this.turno <= 50 || this.matrizSalas[5][5].estadoPuerta() == true) {
-            incrementarTurno();
+        while (this.turno <= 50 || matrizSalas[5][5].estadoPuerta()) {
+            procesoSimulador();
 
+            incrementarTurno();
         }
+
+
     }
 
 
@@ -282,14 +291,35 @@ public class Mapa {
         int coorI = 0;
         int coorJ = 0;
         Targaryen Daenerys = new Targaryen("Daenerys", 'D', 0);
-        Dir[] direccionesT = new Dir[]{Dir.S, Dir.E, Dir.S, Dir.E, Dir.E};
-        this.matrizSalas[coorI][coorJ].insertarPersonajesSala(Daenerys);
+        Dir[] direccionesT = new Dir[]{Dir.E, Dir.S, Dir.S, Dir.S, Dir.O, Dir.S, Dir.E, Dir.E, Dir.N, Dir.E, Dir.S, Dir.S, Dir.E, Dir.E};
+        matrizSalas[coorI][coorJ].insertarPersonajesSala(Daenerys);
+        Daenerys.asignarSala(matrizSalas[coorI][coorJ]);
         Daenerys.asignarRuta(direccionesT);
+        Daenerys.accionesPersonaje();
+        Daenerys.mostrarLlaves();
 
-        Daenerys.accionesPersonaje(this.matrizSalas, coorI, coorJ);
-        //TODO:Debugging machine
 
+    }
 
+    public Sala buscarYDevolverSalaPorId(int id) {
+        Sala aux = null;
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                if (matrizSalas[i][j].getId() == id) {
+                    aux = matrizSalas[i][j];
+                    // System.out.println("Tu Sala se ha encontrado y es la sala: " + aux.getId());
+                }
+            }
+        }
+        return aux;
+    }
+
+    public void procesoSimulador() {
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                //personajes acciones
+            }
+        }
     }
 
 
@@ -297,13 +327,14 @@ public class Mapa {
         Mapa m = new Mapa(6, 6);
 
         m.setMatrizSalas();
+
         m.prepararReparto();
-        m.crearYSituarPersonajes();
+        //m.crearYSituarPersonajes();
 
         m.pruebaRuta();
 
         m.mostrarMapa();
-        // m.simulacion();
+        m.simulacion();
 
 
     }
