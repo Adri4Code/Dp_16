@@ -12,7 +12,6 @@ public abstract class Personajes {
     protected int turno;
     protected Sala SalaActual;
     protected int[] coordenadasActuales;
-    //TODO:Herencia y polimorfismo
 
 
     protected Mapa.Dir[] rutaPersonaje = new Mapa.Dir[200];
@@ -91,25 +90,18 @@ public abstract class Personajes {
 
     public void asignarSala(Sala sala) {
         SalaActual = sala;
+        System.out.println("Mi sala es :" + SalaActual.getId());
     }
 
     public void movimientoPersonaje() {
 
         Personajes p;
-        Mapa miniMapa = Mapa.getInstanciaMapa();
+        Sala aux;
+        Mapa m = Mapa.getInstanciaMapa();
 
 
         if (this.rutaPersonaje[turno] == Mapa.Dir.S) {
-            // asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-            if (SalaActual.existeSala()) {
-
-                p = SalaActual.devolverPrimerPersonaje();
-                this.coordenadasActuales = SalaActual.getCoordenadas();
-                this.coordenadasActuales[0]++;
-                //asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-                SalaActual.insertarPersonajesSala(p);
-                System.out.println("Movido hacia el sur");
-            }
+            p = SalaActual.devolverPrimerPersonaje();
 
 
         }

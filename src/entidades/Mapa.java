@@ -11,17 +11,21 @@ public class Mapa {
     private int Dim2 = 0;
     private Sala[][] matrizSalas = null;
 
-    private Sala salaGanadores = new Sala(1111);
+    Sala salaGanadores = new Sala(1111);
     private int turno = 0;
     private static Mapa mapa = null;
 
     //Constructores
-    private Mapa() {
-        this.Dim1 = 0;
-        this.Dim2 = 0;
+    public Mapa() {
+        this.Dim1 = 6;
+        this.Dim2 = 6;
+        int k = 0;
+        this.matrizSalas = new Sala[Dim1][Dim2];
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                matrizSalas[i][j] = new Sala(7);
+                this.matrizSalas[i][j] = new Sala(0);
+                this.matrizSalas[i][j].setId(k);
+                k++;
 
             }
         }
@@ -35,28 +39,38 @@ public class Mapa {
         if (mapa == null) {
             mapa = new Mapa();
         }
+
         return mapa;
     }
 
 
     private Mapa(int Dim1, int Dim2) {
-        this.Dim1 = Dim1;
-        this.Dim2 = Dim2;
-        for (int i = 0; i < this.Dim1; i++) {
-            for (int j = 0; j < this.Dim2; j++) {
-                // matrizSalas[i][j] = new Sala(7);
-                getInstanciaMapa();
+        int k = 0;
+        this.matrizSalas = new Sala[Dim1][Dim2];
+        for (int i = 0; i < Dim1; i++) {
+            for (int j = 0; j < Dim2; j++) {
+                this.matrizSalas[i][j] = new Sala(0);
+                this.matrizSalas[i][j].setId(k);
+                k++;
             }
         }
         this.salaGanadores = new Sala(1111);
         this.turno = 0;
     }
 
-    public static Mapa getMapaDim(int dim1, int dim2) {
+    public static Mapa getInstanciaMapaDim(int dim1, int dim2) {
         if (mapa == null) {
             mapa = new Mapa(dim1, dim2);
         }
         return mapa;
+    }
+
+    public void showMapa() {
+        for (int i = 0; i < this.Dim1; i++) {
+            for (int j = 0; j < this.Dim2; j++) {
+                System.out.println("Sala :" + this.matrizSalas[i][j].getId());
+            }
+        }
     }
 
     //Getters and Setters
@@ -184,16 +198,16 @@ public class Mapa {
 
 
     public void mostrarMapa() {
-        System.out.println("(turno: " + this.getTurno() + " )");
-        System.out.println("(mapa : " + this.devolverSalaConPuerta() + ")");
-        System.out.println("(puerta:" + this.buscarPuertaYMostrarEstado());//mostrar altura de apertura , llaves cerradura, llaves probadas
+        // System.out.println("(turno: " + this.getTurno() + " )");
+        // System.out.println("(mapa : " + this.devolverSalaConPuerta() + ")");
+        ///System.out.println("(puerta:" + this.buscarPuertaYMostrarEstado());//mostrar altura de apertura , llaves cerradura, llaves probadas
         for (int i = 0; i < getDim1(); i++) {
             for (int j = 0; j < getDim2(); j++) {
                 if (matrizSalas[i][j].existeSala())
                     System.out.println("Sala :" + matrizSalas[i][j].getId());
                 // matrizSalas[i][j].mostrarCoordenadas();
                 //matrizSalas[i][j].mostrarLlavesSala();
-                matrizSalas[i][j].mostrarPersonajeSala();
+                // matrizSalas[i][j].mostrarPersonajeSala();
                 if (matrizSalas[i][j].hayLlave())
                     //    System.out.println("Hay Llaves en esta sala");
                     System.out.println();
@@ -247,8 +261,10 @@ public class Mapa {
     }
 
     public void crearYSituarPersonajes() {
-        /*Targaryen Daenerys = new Targaryen("Daenerys", 'D', 0);
-        matrizSalas[0][0].insertarPersonajesSala(Daenerys);*/
+        Targaryen Daenerys = new Targaryen("Daenerys", 'D', 0);
+        matrizSalas[0][0].insertarPersonajesSala(Daenerys);
+        Daenerys.asignarSala(matrizSalas[0][0]);
+
        /* Stark Arya = new Stark("Arya", 'A', 0);
         matrizSalas[0][0].insertarPersonajesSala(Arya);
         Caminante White = new Caminante("White", 'W', 0);
@@ -290,12 +306,15 @@ public class Mapa {
     public void pruebaRuta() {
         int coorI = 0;
         int coorJ = 0;
+        Sala aux;
         Targaryen Daenerys = new Targaryen("Daenerys", 'D', 0);
         Dir[] direccionesT = new Dir[]{Dir.E, Dir.S, Dir.S, Dir.S, Dir.O, Dir.S, Dir.E, Dir.E, Dir.N, Dir.E, Dir.S, Dir.S, Dir.E, Dir.E};
         matrizSalas[coorI][coorJ].insertarPersonajesSala(Daenerys);
-        Daenerys.asignarSala(matrizSalas[coorI][coorJ]);
+        aux = buscarYDevolverSalaPorId(0);
+        Daenerys.asignarSala(aux);
         Daenerys.asignarRuta(direccionesT);
-        Daenerys.accionesPersonaje();
+        Daenerys.movimientoPersonaje();
+
         Daenerys.mostrarLlaves();
 
 
@@ -307,7 +326,7 @@ public class Mapa {
             for (int j = 0; j < this.Dim2; j++) {
                 if (matrizSalas[i][j].getId() == id) {
                     aux = matrizSalas[i][j];
-                    // System.out.println("Tu Sala se ha encontrado y es la sala: " + aux.getId());
+                    System.out.println("Tu Sala se ha encontrado y es la sala: " + aux.getId());
                 }
             }
         }
@@ -324,17 +343,18 @@ public class Mapa {
 
 
     public static void main(String[] args) {
-        Mapa m = new Mapa(6, 6);
+        Mapa m = null;
+        m = getInstanciaMapaDim(6, 6);
 
-        m.setMatrizSalas();
-
-        m.prepararReparto();
+        //m.setMatrizSalas();
+        //m.buscarYDevolverSalaPorId(30);
+        //m.prepararReparto();
         //m.crearYSituarPersonajes();
 
-        m.pruebaRuta();
+        // m.pruebaRuta();
 
-        m.mostrarMapa();
-        m.simulacion();
+        //m.mostrarMapa();
+        //m.simulacion();
 
 
     }

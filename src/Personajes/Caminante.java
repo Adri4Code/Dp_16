@@ -9,7 +9,7 @@ import java.util.List;
  * Created by adri on 3/01/17.
  */
 public class Caminante extends Villanos {
-    //TODO:Finalizar Herencia en Caminante y Lannister
+
     private List<Personajes> personajesRecogidos = new LinkedList<Personajes>();
 
     public Caminante() {

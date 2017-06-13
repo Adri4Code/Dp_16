@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by adri on 3/01/17.
  */
-public class Lannister extends Personajes {
+public class Lannister extends Villanos {
     private List<Llave> listaLlavesLannister = new LinkedList<Llave>();
 
     public Lannister() {
@@ -21,14 +21,6 @@ public class Lannister extends Personajes {
         this.listaLlavesLannister = new LinkedList<Llave>();
     }
 
-    @Override
-    void accionPuerta() {
-        if (SalaActual.getExistePuerta()) {
-            SalaActual.reconfigurarPuertaSala();
-            movimientoPersonaje();
-        }
-
-    }
 
     public void crearLlavesLannister() {
         int j = 1;
@@ -65,9 +57,6 @@ public class Lannister extends Personajes {
         }
     }
 
-    @Override
-    void accionesPersonaje() {
-    }
 
     /*public static void main(String[] args) {
         Lannister Eddard = new Lannister("Eddard", 'E',0);

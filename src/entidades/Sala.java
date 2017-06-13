@@ -45,6 +45,7 @@ public class Sala {
         }
     }
 
+
     public int getId() {
         return id;
     }
