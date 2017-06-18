@@ -1,27 +1,44 @@
 package Personajes;
 
-import entidades.*;
+import entidades.Llave;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
- * Created by adri on 3/01/17.
+ * @author Adrián Fernández Ramos
+ * @version 2.0
  */
 public class Lannister extends Villanos {
-    private List<Llave> listaLlavesLannister = new LinkedList<Llave>();
+    /**
+     * Atributo que almacena todas las llaves que irá repartiendo a lo largo del mapa
+     */
+    private LinkedList<Llave> listaLlavesLannister = new LinkedList<Llave>();
 
+    /**
+     * Constructor de la clase Lannister
+     */
     public Lannister() {
         super();
         this.listaLlavesLannister = new LinkedList<Llave>();
+        crearLlavesLannister();
     }
 
+    /**
+     * Constructor parametrizado de la clase Lannister
+     *
+     * @param nombre
+     * @param marca
+     * @param turno
+     */
     public Lannister(String nombre, char marca, int turno) {
         super(nombre, marca, turno);
         this.listaLlavesLannister = new LinkedList<Llave>();
+        crearLlavesLannister();
     }
 
-
+    /**
+     * Método que crea todas las llaves del personaje Lannister
+     */
     public void crearLlavesLannister() {
         int j = 1;
         for (int i = 0; i < 15; i++) {
@@ -30,6 +47,9 @@ public class Lannister extends Villanos {
         }
     }
 
+    /**
+     * Método que muestra todas las llaves del personaje Lannister
+     */
     public void mostrarLlaves() {
 
         for (int i = 0; i < this.listaLlavesLannister.size(); i++) {
@@ -37,23 +57,25 @@ public class Lannister extends Villanos {
         }
     }
 
-
+    /**
+     * Devuelve la última llave del personaje Lannister
+     *
+     * @return aux
+     */
     public Llave cogerUltimaLlave() {
-        Llave aux = new Llave();
-        for (int i = 0; i < this.listaLlavesLannister.size(); i++) {
-            if (i + 1 == this.listaLlavesLannister.size()) {
-                aux = this.listaLlavesLannister.get(i);
-                this.listaLlavesLannister.remove(i);
-            }
-        }
+        Llave aux;
+        aux = this.listaLlavesLannister.pollLast();
         return aux;
     }
 
-
-    public void perderLlave(Sala sala) {
+    /**
+     * Acción que deja las llaves en las salas pares
+     */
+    @Override
+    public void accionLlave() {
         Llave aux = new Llave();
-        if (!this.listaLlavesLannister.isEmpty() && sala.getId() % 2 == 0) {
-            sala.insertarLlaveSala(cogerUltimaLlave());
+        if (!this.listaLlavesLannister.isEmpty() && SalaActual.getId() % 2 == 0) {
+            SalaActual.insertarLlaveSala(cogerUltimaLlave());
         }
     }
 

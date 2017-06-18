@@ -3,156 +3,243 @@ package Personajes;
 import entidades.Mapa;
 import entidades.Sala;
 
+import java.util.LinkedList;
+
 /**
- * Created by adri on 3/01/17.
+ * @author Adrián Fernández Ramos
+ * @version 2.0
  */
 public abstract class Personajes {
+    /**
+     * Nombre del personaje
+     */
     protected String nombre;
+    /**
+     * Marca del personaje que aparecerá en el mapa
+     */
     protected char marca;
-    protected int turno;
+
+    /**
+     * Turno actual del personaje
+     */
+    protected int turno = 0;
+
+    /**
+     * Sala en la que se encontrará el personaje
+     */
     protected Sala SalaActual;
-    protected int[] coordenadasActuales;
 
+    /**
+     * Ruta que tendrá que seguir el personaje
+     */
+    protected LinkedList<String> Ruta = new LinkedList<String>();
 
-    protected Mapa.Dir[] rutaPersonaje = new Mapa.Dir[200];
-
-
+    /**
+     * Constructor del personaje
+     */
     public Personajes() {
         this.marca = 'P';
         this.nombre = "";
         this.turno = 0;
-        this.SalaActual = new Sala();
-        this.coordenadasActuales = new int[2];
-        for (int i = 0; i < this.coordenadasActuales.length; i++) {
-            this.coordenadasActuales[i] = 0;
-        }
+        this.SalaActual = new Sala(45);
 
     }
 
+    /**
+     * Constructor parametrizado del personaje
+     *
+     * @param nombre
+     * @param marca
+     * @param turno
+     */
     public Personajes(String nombre, char marca, int turno) {
         this.nombre = nombre;
         this.marca = marca;
         this.turno = turno;
-        this.SalaActual = new Sala();
-        this.coordenadasActuales = new int[2];
-        for (int i = 0; i < this.coordenadasActuales.length; i++) {
-            this.coordenadasActuales[i] = 0;
-        }
+        this.SalaActual = new Sala(45);
     }
 
+    /**
+     * Devuelve el nombre del personaje
+     *
+     * @return nombre
+     */
     public String getNombre() {
         return this.nombre;
     }
 
+    /**
+     * Fija el nombre al personaje
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Devuelve la marca del personaje en cuestión
+     * @return marca
+     */
     public char getMarca() {
         return this.marca;
     }
 
+    /**
+     * Fija la marca que se requiera para el personaje en cuestión
+     * @param marca
+     */
     public void setMarca(char marca) {
         this.marca = marca;
     }
 
+    /**
+     * Devuelve el turno del personaje
+     * @return turno
+     */
     public int getTurno() {
         return this.turno;
     }
 
+    /**
+     * Fija el turno del personaje
+     * @param _turno
+     */
     public void setTurno(int _turno) {
         this.turno = _turno;
     }
 
-    public void asignarRuta(Mapa.Dir[] ruta1) {
-        rutaPersonaje = ruta1;
-
-    }
-
-    public void DevolverRuta() {
-        for (int i = 0; i < this.rutaPersonaje.length; i++) {
-            System.out.println(this.rutaPersonaje[i]);
+    /**
+     * Asigna la ruta en cuestión al personaje
+     *
+     * @param ruta1
+     */
+    public void asignarRuta(String[] ruta1) {
+        for (int i = 0; i < ruta1.length; i++) {
+            this.Ruta.addLast(ruta1[i]);
         }
     }
 
-    public int[] getCoordenadasActuales() {
-        return this.coordenadasActuales;
+    /**
+     * Devuelve la ruta del personaje
+     *
+     * @return
+     */
+    public LinkedList DevolverRuta() {
+        return this.Ruta;
     }
 
-    public void setCoordenadasActuales(int i, int j) {
-        this.coordenadasActuales[0] = i;
-        this.coordenadasActuales[1] = j;
-    }
-
+    /**
+     * Devuelve la sala en la que se encuentre el personaje
+     * @return SalaActual
+     */
     public Sala getSalaActual() {
         return this.SalaActual;
     }
 
+    /**
+     * Asigna la sala en la que se encuentre el personaje
+     * @param sala
+     */
     public void asignarSala(Sala sala) {
-        SalaActual = sala;
-        System.out.println("Mi sala es :" + SalaActual.getId());
+
+        this.SalaActual = sala;
+
     }
 
+    /**
+     * Método que hace que los personajes se muevan a través de
+     * buscar salas y la ruta que tenga en cuestión en ese momento
+     *
+     */
     public void movimientoPersonaje() {
 
         Personajes p;
         Sala aux;
         Mapa m = Mapa.getInstanciaMapa();
+        int numActual = 0;
+        String movimiento = "";
+        if (!this.Ruta.isEmpty()) {
+            movimiento = this.Ruta.getFirst();
+            this.Ruta.removeFirst();
 
-
-        if (this.rutaPersonaje[turno] == Mapa.Dir.S) {
-            p = SalaActual.devolverPrimerPersonaje();
-
-
-        }
-        if (this.rutaPersonaje[turno] == Mapa.Dir.E) {
-            //asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-            if (SalaActual.existeSala()) {
+            System.out.println("Soy el personaje " + this.getNombre() + " y me voy a mover ");
+            if (movimiento == "S") {
                 p = SalaActual.devolverPrimerPersonaje();
-                this.coordenadasActuales = SalaActual.getCoordenadas();
-                this.coordenadasActuales[1]++;
-                //asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-                SalaActual.insertarPersonajesSala(p);
-                System.out.println("Movido hacia el Este");
+
+                if (m.existeSalaPorId(SalaActual.getId() + 6)) {
+
+                    aux = m.buscarYDevolverSalaPorId(SalaActual.getId() + m.getDim1());
+                    numActual = aux.getId();
+                    System.out.println("La nueva sala es : " + numActual);
+                    this.asignarSala(aux);
+                    SalaActual.insertarPersonajesSala(p);
+                    System.out.println("Movido hacia el sur ");
+                } else {
+                    System.out.println("La sala a la que se quiere mover el personaje no existe");
+                }
+
+
+            }
+            if (movimiento == "E") {
+                p = SalaActual.devolverPrimerPersonaje();
+                if (m.existeSalaPorId(SalaActual.getId() + 1)) {
+                    aux = m.buscarYDevolverSalaPorId(SalaActual.getId() + 1);
+                    this.asignarSala(aux);
+                    SalaActual.insertarPersonajesSala(p);
+                    System.out.println("Movido hacia el sur ");
+                } else {
+                    System.out.println("La sala a la que se quiere mover el personaje no existe");
+                }
+
+            }
+            if (movimiento == "N" ) {
+                p = SalaActual.devolverPrimerPersonaje();
+                if (m.existeSalaPorId(SalaActual.getId() - m.getDim1())) {
+                    aux = m.buscarYDevolverSalaPorId(SalaActual.getId() - m.getDim1());
+                    this.asignarSala(aux);
+                    SalaActual.insertarPersonajesSala(p);
+                    System.out.println("Movido hacia el sur ");
+                } else {
+                    System.out.println("La sala a la que se quiere mover el personaje no existe");
+                }
+
+            }
+            if (movimiento == "O" ) {
+                p = SalaActual.devolverPrimerPersonaje();
+                if (m.existeSalaPorId(SalaActual.getId() - 1)) {
+                    aux = m.buscarYDevolverSalaPorId(SalaActual.getId() - 1);
+                    this.asignarSala(aux);
+                    SalaActual.insertarPersonajesSala(p);
+                    System.out.println("Movido hacia el sur ");
+                } else {
+                    System.out.println("La sala a la que se quiere mover el personaje no existe");
+                }
+
             }
 
         }
-        if (this.rutaPersonaje[turno] == Mapa.Dir.N) {
-            //asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-            if (SalaActual.existeSala()) {
-                p = SalaActual.devolverPrimerPersonaje();
-                this.coordenadasActuales = SalaActual.getCoordenadas();
-                this.coordenadasActuales[0]--;
-                //asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-                SalaActual.insertarPersonajesSala(p);
-
-                System.out.println("Movido hacia el norte");
-            }
-
-        }
-        if (this.rutaPersonaje[turno] == Mapa.Dir.O) {
-            // asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-            if (SalaActual.existeSala()) {
-                p = SalaActual.devolverPrimerPersonaje();
-                this.coordenadasActuales = SalaActual.getCoordenadas();
-                this.coordenadasActuales[1]--;
-                // asignarSala(miniMapa[this.coordenadasActuales[0]][this.coordenadasActuales[1]]);
-                SalaActual.insertarPersonajesSala(p);
-
-                System.out.println("Movido hacia el Oeste");
-            }
-
-        }
-
-
     }
 
-
-    public void incrementarTurnoPeronaje() {
-        this.turno++;
-    }
-
+    /**
+     * Acción correspondiente que tenga que hacer el personaje
+     */
     abstract void accionPuerta();
 
+    /**
+     * Acción con llaves que tenga que hacer el personaje
+     */
+    abstract void accionLlave();
 
+    /**
+     * El conjunto de todas las acciones del personaje a la hora
+     * de hacer la simulación de la EC2
+     */
+    public void accionesPersonaje() {
+        Mapa m = Mapa.getInstanciaMapa();
+        accionPuerta();
+        movimientoPersonaje();
+        accionLlave();
+
+        this.turno++;
+    }
 }

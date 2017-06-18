@@ -1,7 +1,8 @@
 package Personajes;
 
 /**
- * Created by adri on 3/01/17.
+ * @author Adrián Fernández Ramos
+ * @version 2.0
  */
 public class Stark extends Heroes {
     public Stark() {

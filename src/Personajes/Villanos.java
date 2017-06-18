@@ -1,25 +1,37 @@
 package Personajes;
 
 /**
- * Created by adri on 27/04/17.
+ * @author Adrián Fernández Ramos
+ * @version 2.0
  */
-public class Villanos extends Personajes {
+public abstract class Villanos extends Personajes {
+    /**
+     * Consructor de la clase Villanos
+     */
     public Villanos() {
         super();
     }
 
+    /**
+     * Consructor parametrizado de la clase Villanos
+     *
+     * @param nombre
+     * @param marca
+     * @param turno
+     */
     public Villanos(String nombre, char marca, int turno) {
         super(nombre, marca, turno);
     }
 
-    public void CerrarPuerta() {
-
-    }
+    /**
+     * Acción con respecto a la puerta que realizarán los Villanos
+     */
     @Override
     public void accionPuerta() {
         if (SalaActual.getExistePuerta()) {
             SalaActual.reconfigurarPuertaSala();
-            movimientoPersonaje();
         }
     }
+
+
 }
